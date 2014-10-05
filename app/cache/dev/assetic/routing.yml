@@ -1,0 +1,5 @@
+_assetic:
+    resource: .
+    type: assetic
+_app:
+    resource: /home/kisscool/workspace/php/qrcode_web_access/trunk/app/config/routing_dev.yml
