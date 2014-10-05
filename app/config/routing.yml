@@ -1,0 +1,4 @@
+tlmalpqrcode_photo_associate:
+    resource: "@tlmalpqrcodePhotoAssociateBundle/Resources/config/routing.yml"
+    prefix:   /
+

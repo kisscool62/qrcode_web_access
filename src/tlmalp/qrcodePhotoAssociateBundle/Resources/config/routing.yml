@@ -1,0 +1,3 @@
+tlmalpqrcode_photo_associate_homepage:
+    path:     /{action}/{qrcode}/{photo}/
+    defaults: { _controller: tlmalpqrcodePhotoAssociateBundle:Default:associate }
