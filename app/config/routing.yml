@@ -1,4 +1,4 @@
-tlmalpqrcode_photo_associate:
-    resource: "@tlmalpqrcodePhotoAssociateBundle/Resources/config/routing.yml"
+_TlmalpQrcode_photo_associate:
+    resource: "@TlmalpQrcodePhotoAssociateBundle/Resources/config/routing.yml"
     prefix:   /
 
