@@ -1,0 +1,6 @@
+parameters:
+    database_driver:    pdo_mysql
+    database_host:      localhost
+    database_name:      symfony_tlmalp
+    database_user:      kisscool
+    database_password:  gOgRvmj0

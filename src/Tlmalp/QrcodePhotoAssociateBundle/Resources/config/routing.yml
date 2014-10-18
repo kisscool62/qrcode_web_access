@@ -2,6 +2,15 @@ _default:
     path:     /
     defaults: { _controller: TlmalpQrcodePhotoAssociateBundle:Default:index }
 
+_tlmalpToto:
+    resource: "@TlmalpQrcodePhotoAssociateBundle/Controller/DefaultController.php"
+    type:     annotation
+
+
+_tlmalpQrcodePhoto:
+    resource: "@TlmalpQrcodePhotoAssociateBundle/Controller/DefaultController.php"
+    type:     annotation
+
 _tlmalpQrcode_photo_associate:
     resource: "@TlmalpQrcodePhotoAssociateBundle/Controller/DefaultController.php"
     type:     annotation
