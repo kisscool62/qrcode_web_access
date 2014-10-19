@@ -25,33 +25,61 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/yourphoto.png", name="_tlmalpQrcodePhoto")
+     * @Route("/yourphoto/{action}/{qrcode}", name="_tlmalpQrcodePhoto")
      * @Template()
      */
-    public function photoAction()
+    public function photoAction($action, $qrcode)
     {
-        $action = 'toto';
-        $qrcode = 'tata';
-        $qrcodeassociation = $this->getDoctrine()
-            ->getRepository('Tlmalp\QrcodePhotoAssociateBundle\Entity\QRCodeAssociation')
-            ->findOneBy(array('qrcode' => $qrcode, 'action' => $action));
-
-        return $this->render('TlmalpQrcodePhotoAssociateBundle:Default:associate.html.twig', array('action' => 'pas trouve', 'qrcode' => $qrcode, 'photo' => 'pas trouve'));
+        $qrcodeassociation = $this->findAssociationByCode($action, $qrcode);
 
         if (!$qrcodeassociation){
-            throw $this->createNotFoundException('QRCODE : ' & $qrcode & ' for action : ' & $action & ' was not found');
+            $this->get('session')->getFlashBag()->add(
+                'error',
+                'QRCODE : ' . $qrcode . ' for action : ' . $action . ' was not found!'
+            );
+            return $this->render('TlmalpQrcodePhotoAssociateBundle:Default:associate.html.twig');
+        }else{
+            return $this->render('TlmalpQrcodePhotoAssociateBundle:Default:associate.html.twig', array('action' => $action, 'qrcode' => $qrcode, 'photo' => $qrcodeassociation->getPhoto()));
         }
 
-        return $this->render('TlmalpQrcodePhotoAssociateBundle:Default:associate.html.twig', array('action' => $action, 'qrcode' => $qrcode, 'photo' => $qrcodeassociation->getPhoto()));
 
     }
 
     /**
-     * @Route("/associate/{action}/{qrcode}/{photo}", name="_tlmalpQrcode_photo_associate")
+     * @Route("/associate/{action}/{qrcode}/{photo}", name="_tlmalpQrcode_photo_associate", methods={"PUT"})
      * @Template()
      */
     public function associateAction($action, $qrcode, $photo)
     {
+        $association = new QRCodeAssociation();
+        $association->setAction($action);
+        $association->setQrcode($qrcode);
+        $association->setPhotoFileName($photo);
+
+        $foundAssociation = $this->findAssociationByCode($action, $qrcode);
+
+        if ($foundAssociation){
+            $action="not saved";
+        }else{
+            $action="saved!! :)";
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($association);
+
+        }
+
         return $this->render('TlmalpQrcodePhotoAssociateBundle:Default:associate.html.twig', array('action' => $action, 'qrcode' => $qrcode, 'photo' => $photo));
+    }
+
+    /**
+     * @param $action
+     * @param $qrcode
+     * @return object
+     */
+    public function findAssociationByCode($action, $qrcode)
+    {
+        $qrcodeassociation = $this->getDoctrine()
+            ->getRepository('Tlmalp\QrcodePhotoAssociateBundle\Entity\QRCodeAssociation')
+            ->findOneBy(array('qrcode' => $qrcode, 'action' => $action));
+        return $qrcodeassociation;
     }
 }

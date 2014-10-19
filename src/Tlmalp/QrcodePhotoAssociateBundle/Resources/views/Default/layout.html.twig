@@ -1,6 +1,14 @@
-{% extends "TlmalpQrcodePhotoAssociateBundle::layout.html.twig" %}
+{% extends "::base.html.twig" %}
 
-{% block content_header_more %}
-    {{ parent() }}
-    <li>logged in as <strong>{{ app.user ? app.user.username : 'Anonymous' }}</strong> - <a href="{{ path('_demo_logout') }}">Logout</a></li>
+{% block stylesheets %}
+     <link rel="stylesheet" href="{{ asset('bundles/tlmalpqrcodephotoassociate/css/main.css') }}" />
+{% endblock %}
+
+{% block title 'This is your photo' %}
+
+{% block body %}
+
+    <div>
+        {% block content %}tototo{% endblock %}
+    </div>
 {% endblock %}
