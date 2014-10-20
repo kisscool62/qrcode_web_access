@@ -64,7 +64,7 @@ class DefaultController extends Controller
             $action="saved!! :)";
             $em = $this->getDoctrine()->getManager();
             $em->persist($association);
-
+            $em.flush();
         }
 
         return $this->render('TlmalpQrcodePhotoAssociateBundle:Default:associate.html.twig', array('action' => $action, 'qrcode' => $qrcode, 'photo' => $photo));
