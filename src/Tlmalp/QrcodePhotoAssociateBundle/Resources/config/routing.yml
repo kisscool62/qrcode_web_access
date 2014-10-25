@@ -2,15 +2,26 @@ _default:
     path:     /
     defaults: { _controller: TlmalpQrcodePhotoAssociateBundle:Default:index }
 
-_tlmalpToto:
+_show_photo:
+    resource: "@TlmalpQrcodePhotoAssociateBundle/Controller/DefaultController.php"
+    type:     annotation
+
+_override_association:
     resource: "@TlmalpQrcodePhotoAssociateBundle/Controller/DefaultController.php"
     type:     annotation
 
 
-_tlmalpQrcodePhoto:
+_show_association:
     resource: "@TlmalpQrcodePhotoAssociateBundle/Controller/DefaultController.php"
     type:     annotation
 
-_tlmalpQrcode_photo_associate:
+_create_association:
     resource: "@TlmalpQrcodePhotoAssociateBundle/Controller/DefaultController.php"
     type:     annotation
+
+remove_trailing_slash:
+    path: /{url}
+    defaults: { _controller: TlmalpQrcodePhotoAssociateBundle:Redirecting:removeTrailingSlash }
+    requirements:
+        url: .*/$
+    methods: [GET]

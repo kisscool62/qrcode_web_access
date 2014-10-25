@@ -68,9 +68,14 @@ ul#demo-list a {
     font-family: Arial;
 }
 
-.alert {
+.alert-errors {
     background-color: #f01343;
 }
+
+.alert-successes {
+    background-color: #7aba20;
+}
+
 .flash-message {
     padding: 10px;
     margin: 5px;

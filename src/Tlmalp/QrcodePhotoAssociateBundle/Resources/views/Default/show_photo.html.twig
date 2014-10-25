@@ -1,0 +1,20 @@
+{%  extends "TlmalpQrcodePhotoAssociateBundle:Default:layout.html.twig" %}
+
+{% block content %}
+
+    {% if app.session.flashbag.has('error') %}
+
+        {% for flashMessage in app.session.flashbag.get('error') %}
+        <div class="alert alert-error">
+
+            <span>{{ flashMessage }}</span>
+        </div>
+        {% endfor %}
+    {% else %}
+    <div>
+        Hello l'action était {{ action }}, le qrcode {{ qrcode }}, et la photo {{ photo }}!!
+
+        <img src="{{ asset( 'images/' ~ action ~ '/' ~ photo ) }}">
+    </div>
+    {% endif %}
+{% endblock %}
